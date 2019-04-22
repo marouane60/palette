@@ -26,16 +26,12 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
 
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/new-board', {
-        controller: 'NewBoardCtrl',
-        template: '<pre>redirect to new board</pre>'
-      })
-      .when('/:boardId', {
+      .when('/board', {
         controller: 'MainCtrl',
         templateUrl: 'app/app.tpl.html'
       })
       .otherwise({
-        redirectTo: '/new-board'
+        redirectTo: '/board'
       })
   })
 
@@ -56,9 +52,3 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
     $scope.minimapZoomScale = 0.1;
     $scope.surfacePositionOffset = {};
   })
-
-  .controller('NewBoardCtrl', function ($scope, $location, ShortIdGenerator) {
-    var newBoardId = ShortIdGenerator.generate();
-    $location.path('/' + newBoardId);
-
-  });
