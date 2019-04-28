@@ -8,6 +8,7 @@ angular.module('nuBoard')
 
         var isDraw = false;
         var localShapeId;
+        var isDrawEnabled = true;
 
         var reportAction = function (action) {
 
@@ -74,22 +75,27 @@ angular.module('nuBoard')
           reportAction(action);
         };
 
-        var eventHandlers = {
-          'mousedown': function (data) {
-            actionStart(data);
-          },
-          'mouseup': function (data) {
-            actionEnd(data);
-          },
-          'mousemove': function (data) {
-            if (isDraw) {
-              actionProceed(data);
+        var eventHandlers = {};
+        
+        if(isDrawEnabled){
+          eventHandlers = {
+            'mousedown': function (data) {
+              actionStart(data);
+            },
+            'mouseup': function (data) {
+              actionEnd(data);
+            },
+            'mousemove': function (data) {
+              if (isDraw) {
+                actionProceed(data);
+              }
+            },
+            'mouseout': function (data) {
+              actionEnd(data);
             }
-          },
-          'mouseout': function (data) {
-            actionEnd(data);
-          }
-        };
+          };       
+        }
+
 
         _.each(Object.keys(eventHandlers), function (eventName) {
           $element.on(eventName, eventHandlers[eventName])
@@ -97,6 +103,7 @@ angular.module('nuBoard')
 
       },
       controller: function ($scope) {
+
 
       }
     }
