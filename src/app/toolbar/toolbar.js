@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nuBoard')
-  .controller('ToolbarController', function ($scope, ToolbarService) {
+  .controller('ToolbarController', function ($scope, ToolbarService, $location) {
 
     $scope.selected = {};
 
@@ -55,6 +55,10 @@ angular.module('nuBoard')
 
     $scope.toggleTool = function (tool) {
       tool.active = !tool.active;
+    };
+
+    $scope.signIn = function () {
+      $location.url('/sign-in');
     };
   })
 

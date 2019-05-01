@@ -30,6 +30,9 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
         controller: 'MainCtrl',
         templateUrl: 'app/app.tpl.html'
       })
+      .when('/sign-in', {
+        templateUrl: 'app/sign-in/sign-in.tpl.html'
+      })
       .otherwise({
         redirectTo: '/board'
       })
@@ -52,3 +55,5 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
     $scope.minimapZoomScale = 0.1;
     $scope.surfacePositionOffset = {};
   })
+
+  
