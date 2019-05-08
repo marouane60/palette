@@ -75,11 +75,12 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
   // Get a reference to the database service
   var database = firebase.database();
 
+  var user;
+
       // FirebaseUI config.
       var uiConfig = {
         callbacks: {
           signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-            var user = authResult.user;
             var credential = authResult.credential;
             var isNewUser = authResult.additionalUserInfo.isNewUser;
             var providerId = authResult.additionalUserInfo.providerId;
@@ -94,10 +95,22 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
                   email: authResult.user.email,
                   inkLvl:100
                 });
-              
 
+            user = {id:authResult.user.uid,email:authResult.user.email,inkLvl:100}
+            window.localStorage.setItem('user', JSON.stringify(user));
 
+            }else{
+              firebase.database().ref('/users/' + authResult.user.uid).once('value').then(function(snapshot) {
+                user = {id:snapshot.val().id,email:snapshot.val().email,inkLvl:snapshot.val().inkLvl};
+                window.localStorage.setItem('user', JSON.stringify(user));
+
+                console.log(localStorage.getItem('user'));
+                            });
             }
+            
+            
+
+
             // Do something with the returned AuthResult.
             // Return type determines whether we continue the redirect automatically
             // or whether we leave that to developer to handle.
