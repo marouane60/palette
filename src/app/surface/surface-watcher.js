@@ -8,7 +8,13 @@ angular.module('nuBoard')
 
         var isDraw = false;
         var localShapeId;
-        var isDrawEnabled = true;
+        var isDrawEnabled;
+        var user = JSON.parse(localStorage.getItem('user'));
+
+        if(user && user.inkLvl>0)
+          isDrawEnabled = true;
+        else
+          isDrawEnabled = false;
 
         var reportAction = function (action) {
 
@@ -70,8 +76,26 @@ angular.module('nuBoard')
             return;
           }
           var point = positionToPoint(eventData);
-          action.points.push(point[0]);
-          action.points.push(point[1]);
+          
+          if(user.inkLvl>0){
+            user.inkLvl = user.inkLvl - 1;
+            action.points.push(point[0]);
+            action.points.push(point[1]);
+
+            var userNew = {
+              id: user.id,
+              email: user.email,
+              inkLvl: user.inkLvl
+            };
+            var updates = {};
+
+            updates['/users/' + user.id] = userNew;
+
+            localStorage.setItem('user',JSON.stringify(user));
+            firebase.database().ref().update(updates);
+
+          }
+
           reportAction(action);
         };
 

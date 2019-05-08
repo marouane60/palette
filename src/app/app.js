@@ -41,6 +41,19 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
 
   .controller('MainCtrl', function ($scope, $routeParams, $rootScope, SyncService, AppConfig, SurfaceService, UserService) {
 
+          // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBUDgl99tdUHmvUuISj4van0SCuUA_cX6g",
+    authDomain: "palette-ef61a.firebaseapp.com",
+    databaseURL: "https://palette-ef61a.firebaseio.com",
+    projectId: "palette-ef61a",
+    storageBucket: "palette-ef61a.appspot.com",
+    messagingSenderId: "831285475315",
+    appId: "1:831285475315:web:956b2a6f103134ea"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  
     if (AppConfig.syncActive) {
       SyncService.init();
     }
@@ -59,18 +72,7 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
 
   .controller('SignCtrl', function ($scope, $routeParams, $rootScope, SyncService, AppConfig) {
     
-      // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyBUDgl99tdUHmvUuISj4van0SCuUA_cX6g",
-    authDomain: "palette-ef61a.firebaseapp.com",
-    databaseURL: "https://palette-ef61a.firebaseio.com",
-    projectId: "palette-ef61a",
-    storageBucket: "palette-ef61a.appspot.com",
-    messagingSenderId: "831285475315",
-    appId: "1:831285475315:web:956b2a6f103134ea"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+
 
   // Get a reference to the database service
   var database = firebase.database();
@@ -132,6 +134,7 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
         // tosUrl and privacyPolicyUrl accept either url string or a callback
         // function.
         // Terms of service url/callback.
+        signInSuccessUrl: '/',
         tosUrl: '<your-tos-url>',
         // Privacy policy url/callback.
         privacyPolicyUrl: function() {
