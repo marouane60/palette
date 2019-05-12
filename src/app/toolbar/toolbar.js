@@ -1,9 +1,17 @@
 'use strict';
 
 angular.module('nuBoard')
-  .controller('ToolbarController', function ($scope, ToolbarService, $location) {
+  .controller('ToolbarController', function ($rootScope, $scope, ToolbarService, $location) {
 
     $scope.selected = {};
+
+    $scope.inkLvl = 0;
+
+    var user = JSON.parse(localStorage.getItem('user'));
+
+    if(user){
+      $scope.inkLvl = user.inkLvl;
+    }
 
     $scope.menu = {
       tools: [
@@ -43,9 +51,10 @@ angular.module('nuBoard')
     $scope.$watch('menu', function () {
         ToolbarService.updateState(angular.copy($scope.menu));
         $scope.selected = ToolbarService.getState();
+        console.log(document.getElementById('progress').style.color);
+        document.getElementById('progress').style.color = $scope.selected.color;
       }, true
     );
-
     $scope.pickTool = function (tool, option) {
       angular.forEach(tool.options, function (anyOption) {
         delete anyOption.selected

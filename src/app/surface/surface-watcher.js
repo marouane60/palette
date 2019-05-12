@@ -92,8 +92,9 @@ angular.module('nuBoard')
             updates['/users/' + user.id] = userNew;
 
             localStorage.setItem('user',JSON.stringify(user));
-            firebase.database().ref().update(updates);
+            document.getElementById('progress').value = user.inkLvl;
 
+            firebase.database().ref().update(updates);
           }
 
           reportAction(action);

@@ -72,7 +72,20 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
 
   .controller('SignCtrl', function ($scope, $routeParams, $rootScope, SyncService, AppConfig) {
     
+  // Initialize Firebase
+  if (!firebase.apps.length) {
+    var firebaseConfig = {
+      apiKey: "AIzaSyBUDgl99tdUHmvUuISj4van0SCuUA_cX6g",
+      authDomain: "palette-ef61a.firebaseapp.com",
+      databaseURL: "https://palette-ef61a.firebaseio.com",
+      projectId: "palette-ef61a",
+      storageBucket: "palette-ef61a.appspot.com",
+      messagingSenderId: "831285475315",
+      appId: "1:831285475315:web:956b2a6f103134ea"
+    }
 
+    firebase.initializeApp(firebaseConfig);
+  }
 
   // Get a reference to the database service
   var database = firebase.database();
@@ -88,9 +101,6 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
             var providerId = authResult.additionalUserInfo.providerId;
             var operationType = authResult.operationType;
 
-            console.log("user : "+user+"credential : "+credential+"isnewuser : "+isNewUser+"providerid : "+providerId
-            +"operationtype : "+operationType);
-
             if(isNewUser){
                 firebase.database().ref('users/' + authResult.user.uid).set({
                   id:authResult.user.uid,
@@ -100,13 +110,13 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
 
             user = {id:authResult.user.uid,email:authResult.user.email,inkLvl:100}
             window.localStorage.setItem('user', JSON.stringify(user));
-
             }else{
               firebase.database().ref('/users/' + authResult.user.uid).once('value').then(function(snapshot) {
                 user = {id:snapshot.val().id,email:snapshot.val().email,inkLvl:snapshot.val().inkLvl};
                 window.localStorage.setItem('user', JSON.stringify(user));
 
                 console.log(localStorage.getItem('user'));
+                window.location.href = '/';
                             });
             }
             
@@ -134,7 +144,6 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
         // tosUrl and privacyPolicyUrl accept either url string or a callback
         // function.
         // Terms of service url/callback.
-        signInSuccessUrl: '/',
         tosUrl: '<your-tos-url>',
         // Privacy policy url/callback.
         privacyPolicyUrl: function() {
