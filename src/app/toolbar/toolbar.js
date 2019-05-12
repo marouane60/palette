@@ -51,8 +51,6 @@ angular.module('nuBoard')
     $scope.$watch('menu', function () {
         ToolbarService.updateState(angular.copy($scope.menu));
         $scope.selected = ToolbarService.getState();
-        console.log(document.getElementById('progress').style.color);
-        document.getElementById('progress').style.color = $scope.selected.color;
       }, true
     );
     $scope.pickTool = function (tool, option) {
