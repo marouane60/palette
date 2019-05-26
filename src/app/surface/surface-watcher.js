@@ -78,7 +78,7 @@ angular.module('nuBoard')
           var point = positionToPoint(eventData);
           
           if(user.inkLvl>0){
-            user.inkLvl = user.inkLvl - 1;
+            user.inkLvl = user.inkLvl - window.localStorage.getItem('inkWidth');
             action.points.push(point[0]);
             action.points.push(point[1]);
 

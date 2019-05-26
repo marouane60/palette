@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nuBoard')
-  .controller('ToolbarController', function ($rootScope, $scope, ToolbarService, $location) {
+  .controller('ToolbarController', function ($scope, ToolbarService, $location) {
 
     $scope.selected = {};
 
@@ -58,6 +58,7 @@ angular.module('nuBoard')
         delete anyOption.selected
       });
       option.selected = true;
+      window.localStorage.setItem('inkWidth', option.value);
     };
 
     $scope.toggleTool = function (tool) {

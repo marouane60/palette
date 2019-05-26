@@ -100,6 +100,7 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
             var isNewUser = authResult.additionalUserInfo.isNewUser;
             var providerId = authResult.additionalUserInfo.providerId;
             var operationType = authResult.operationType;
+            window.localStorage.setItem('inkWidth', 5);
 
             if(isNewUser){
                 firebase.database().ref('users/' + authResult.user.uid).set({
