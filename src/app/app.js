@@ -34,6 +34,10 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
         controller: 'SignCtrl',
         templateUrl: 'app/sign-in/sign-in.tpl.html'
       })
+      .when('/payment', {
+        controller: 'PaymentCtrl',
+        templateUrl: 'app/payment/payment.tpl.html'
+      })
       .otherwise({
         redirectTo: '/board'
       })
@@ -106,10 +110,10 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
                 firebase.database().ref('users/' + authResult.user.uid).set({
                   id:authResult.user.uid,
                   email: authResult.user.email,
-                  inkLvl:100
+                  inkLvl:0
                 });
 
-            user = {id:authResult.user.uid,email:authResult.user.email,inkLvl:100}
+            user = {id:authResult.user.uid,email:authResult.user.email,inkLvl:0}
             window.localStorage.setItem('user', JSON.stringify(user));
             }else{
               firebase.database().ref('/users/' + authResult.user.uid).once('value').then(function(snapshot) {
@@ -158,3 +162,109 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
       ui.start('#firebaseui-auth-container', uiConfig);
   })
   
+  .controller('PaymentCtrl', function ($scope, $routeParams, $rootScope, SyncService, AppConfig) {
+
+    var user = JSON.parse(localStorage.getItem('user'));
+
+
+
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+        // Set up the transaction
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: '1'
+            }
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        // Capture the funds from the transaction
+        return actions.order.capture().then(function(details) {
+          // Show a success message to your buyer
+          alert('Transaction completed by ' + details.payer.name.given_name);
+
+          user.inkLvl = user.inkLvl + 1000;
+
+          var userNew = {
+            id: user.id,
+            email: user.email,
+            inkLvl: user.inkLvl
+          };
+
+          var updates = {};
+          updates['/users/' + user.id] = userNew;
+          localStorage.setItem('user',JSON.stringify(user));
+          firebase.database().ref().update(updates);
+          
+        });
+      }
+    }).render('#paypal-button-10');
+
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+        // Set up the transaction
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: '10'
+            }
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        // Capture the funds from the transaction
+        return actions.order.capture().then(function(details) {
+          // Show a success message to your buyer
+          alert('Transaction completed by ' + details.payer.name.given_name);
+                    user.inkLvl = user.inkLvl + 5000;
+
+          var userNew = {
+            id: user.id,
+            email: user.email,
+            inkLvl: user.inkLvl
+          };
+          
+          var updates = {};
+          updates['/users/' + user.id] = userNew;
+          localStorage.setItem('user',JSON.stringify(user));
+          firebase.database().ref().update(updates);
+        });
+      }
+    }).render('#paypal-button-100');
+
+
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+        // Set up the transaction
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: '100'
+            }
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        // Capture the funds from the transaction
+        return actions.order.capture().then(function(details) {
+          // Show a success message to your buyer
+          alert('Transaction completed by ' + details.payer.name.given_name);
+          user.inkLvl = user.inkLvl + 10000;
+
+          var userNew = {
+            id: user.id,
+            email: user.email,
+            inkLvl: user.inkLvl
+          };
+          
+          var updates = {};
+          updates['/users/' + user.id] = userNew;
+          localStorage.setItem('user',JSON.stringify(user));
+          firebase.database().ref().update(updates);
+        });
+      }
+    }).render('#paypal-button-500');
+  
+  })

@@ -11,7 +11,7 @@
         title="follow actions of a collaborator (currently {{tool.active? 'on' : 'off'}})"
         >
         <div
-          ng-click="toggleTool(tool)"
+          ng-click="payment()"
           class="tool-option follow-action"
           ng-class="{active : tool.active}"
           >
@@ -64,7 +64,7 @@
   <i class="fa fa-circle"></i>
 </div>
   <progress id="progress"
-          max=100
+          max=1000
           min=0
           value={{inkLvl}}
         />

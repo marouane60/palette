@@ -68,6 +68,10 @@ angular.module('nuBoard')
     $scope.signIn = function () {
       $location.url('/sign-in');
     };
+
+    $scope.payment = function () {
+      $location.url('/payment');
+    };
   })
 
   .directive('nuToolbar', function () {
