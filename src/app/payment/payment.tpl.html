@@ -10,19 +10,23 @@
     <script type="text/javascript">
     </script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <style type="text/css">
+      body { background: black !important;
+             color:white;
+            } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+   </style>
   </head>
-  <body >
+  <body>
 
     <!-- The surrounding HTML is left untouched by FirebaseUI.
          Your app may use that space for branding, controls and other customizations.-->
-    <h1>Payment Page</h1>
-    <div class="card-deck" style="margin-top:10%">
+    <h1 style="font-family: Arizonia, Helvetica, sans-serif; padding:2%; font-size: 500%">Payment :</h1>
+    <div class="card-deck" style="margin-top:5%; color:black">
       <div class="card">
         <!--<img class="card-img-top" src="..." alt="Card image cap">-->
         <div class="card-body">
           <h5 class="card-title">Write a word</h5>
-          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+          <p class="card-text">Gets you 10ml of ink.</p>
           <h5 class="card-title">Price</h5>
           <p class="card-text">1 dollar</p>
           <div id="paypal-button-10"></div>
@@ -34,9 +38,9 @@
         <!--<img class="card-img-top" src="..." alt="Card image cap">-->
         <div class="card-body">
           <h5 class="card-title">Write a Sentence</h5>
-          <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+          <p class="card-text">Gets you 100ml of ink</p>
           <h5 class="card-title">Price</h5>
-          <p class="card-text">10 dollars</p>
+          <p class="card-text">5 dollars</p>
           <div id="paypal-button-100"></div>
 
             
@@ -46,9 +50,9 @@
         <!--<img class="card-img-top" src="..." alt="Card image cap">-->
         <div class="card-body">
           <h5 class="card-title">Write a Paragraph</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+          <p class="card-text">Gets you 5000ml of ink</p>
           <h5 class="card-title">Price</h5>
-          <p class="card-text">100 dollars</p>
+          <p class="card-text">50 dollars</p>
           <div id="paypal-button-500"></div>
 
             

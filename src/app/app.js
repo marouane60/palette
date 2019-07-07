@@ -218,7 +218,7 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
         return actions.order.capture().then(function(details) {
           // Show a success message to your buyer
           alert('Transaction completed by ' + details.payer.name.given_name);
-                    user.inkLvl = user.inkLvl + 5000;
+                    user.inkLvl = user.inkLvl + 10000;
 
           var userNew = {
             id: user.id,
