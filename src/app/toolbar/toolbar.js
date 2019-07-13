@@ -4,7 +4,6 @@ angular.module('nuBoard')
   .controller('ToolbarController', function ($scope, ToolbarService, $location) {
 
     $scope.selected = {};
-
     $scope.inkLvl = 0;
 
     var user = JSON.parse(localStorage.getItem('user'));
