@@ -10,13 +10,13 @@
         ng-if="tool.id === 'followAction'"
         title="follow actions of a collaborator (currently {{tool.active? 'on' : 'off'}})"
         >
-        <div
+        <!--<div
           ng-click="payment()"
           class="tool-option follow-action"
           ng-class="{active : tool.active}"
           >
           <i class="fa fa-dot-circle-o"></i>
-        </div>
+        </div>-->
       </div>
 
       <div ng-if="tool.id === 'stylus'">
@@ -57,12 +57,12 @@
     </div>
   </div>
 
-  <div
+  <!--<div
   ng-click="signIn()"
   class="tool-option width"
   style="color: red">
   <i class="fa fa-circle"></i>
-</div>
+</div>-->
   <progress id="progress"
           max=1000
           min=0

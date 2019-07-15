@@ -7,6 +7,17 @@ angular.module('nuBoard')
       replace: true
     }
   })
-  .controller('ButtonCtrl', function ($scope, RouterService) {
+  .controller('ButtonCtrl', function ($scope, $location, RouterService) {
 
+    if(localStorage.getItem('user')){
+      $scope.buttonText = "Get more ink";
+      $scope.draw = function () {
+        $location.url('/payment');
+      };
+    }
+    else{
+      $scope.draw = function () {
+        $location.url('/sign-in');
+      };      
+    }
   });
