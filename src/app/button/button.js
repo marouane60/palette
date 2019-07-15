@@ -16,6 +16,7 @@ angular.module('nuBoard')
       };
     }
     else{
+      $scope.buttonText = "Start drawing";
       $scope.draw = function () {
         $location.url('/sign-in');
       };      

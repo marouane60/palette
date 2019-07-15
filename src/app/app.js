@@ -115,6 +115,8 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
 
             user = {id:authResult.user.uid,email:authResult.user.email,inkLvl:0}
             window.localStorage.setItem('user', JSON.stringify(user));
+
+            window.location.href = '/';
             }else{
               firebase.database().ref('/users/' + authResult.user.uid).once('value').then(function(snapshot) {
                 user = {id:snapshot.val().id,email:snapshot.val().email,inkLvl:snapshot.val().inkLvl};
