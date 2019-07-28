@@ -57,7 +57,9 @@ angular.module('nuBoard')
         delete anyOption.selected
       });
       option.selected = true;
-      window.localStorage.setItem('inkWidth', option.value);
+      if(tool.id == 'width'){
+        window.localStorage.setItem('inkWidth', option.value);
+      }
     };
 
     $scope.toggleTool = function (tool) {

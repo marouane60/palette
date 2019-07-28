@@ -164,11 +164,13 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
       ui.start('#firebaseui-auth-container', uiConfig);
   })
   
-  .controller('PaymentCtrl', function ($scope, $routeParams, $rootScope, SyncService, AppConfig) {
+  .controller('PaymentCtrl', function ($scope, $location, $routeParams, $rootScope, SyncService, AppConfig) {
 
     var user = JSON.parse(localStorage.getItem('user'));
 
-
+    $scope.home = function () {
+      window.location.href = '/';
+    };
 
     paypal.Buttons({
       createOrder: function(data, actions) {
@@ -200,6 +202,7 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
           localStorage.setItem('user',JSON.stringify(user));
           firebase.database().ref().update(updates);
           
+          window.location.href = '/';
         });
       }
     }).render('#paypal-button-10');
@@ -232,6 +235,8 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
           updates['/users/' + user.id] = userNew;
           localStorage.setItem('user',JSON.stringify(user));
           firebase.database().ref().update(updates);
+
+          window.location.href = '/';
         });
       }
     }).render('#paypal-button-100');
@@ -265,6 +270,8 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
           updates['/users/' + user.id] = userNew;
           localStorage.setItem('user',JSON.stringify(user));
           firebase.database().ref().update(updates);
+
+          window.location.href = '/';
         });
       }
     }).render('#paypal-button-500');
