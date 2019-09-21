@@ -213,7 +213,7 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
         return actions.order.create({
           purchase_units: [{
             amount: {
-              value: '10'
+              value: '5'
             }
           }]
         });
@@ -223,7 +223,7 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
         return actions.order.capture().then(function(details) {
           // Show a success message to your buyer
           alert('Transaction completed by ' + details.payer.name.given_name);
-                    user.inkLvl = user.inkLvl + 10000;
+                    user.inkLvl = user.inkLvl + 5000;
 
           var userNew = {
             id: user.id,
@@ -248,7 +248,7 @@ angular.module('nuBoard', ['firebase', 'ngRoute'])
         return actions.order.create({
           purchase_units: [{
             amount: {
-              value: '100'
+              value: '10'
             }
           }]
         });

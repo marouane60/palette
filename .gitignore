@@ -11,3 +11,8 @@ dist
 *.iml
 *.log
 .grunt/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
